@@ -2,7 +2,6 @@
 package FinalProjectDS;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -58,22 +57,13 @@ public class Studlist<T> implements Iterable<T>{
         Size--;
         }
         
-        public int indexOfSting(String searchVal) {
+        public int indexOf(String search) {
         for (int i = 0; i < data.length; i++) {
-        if (data[i].equals(searchVal)) {
+        if (data[i].equals(search)) {
             return i;}}       
         return -1;
-        }
-        public int indexOfInt(int searchVal) {
-        for (int i = 0; i < data.length; i++) {
-        if (data[i].equals(searchVal)) {
-            return i;}}       
-        return -1;
-        }
-     
-        public void sort() {
-        Arrays.sort(this.data);// it will sort the data in incement 
-         }
+        }        
+        
         public void display(int displayIt){        
         System.out.println(data[displayIt]);
         }
@@ -84,15 +74,17 @@ public class Studlist<T> implements Iterable<T>{
 	}
 	
 	public class CustomIterator<arr> implements Iterator<arr> {
-		
+		// set index determine if reached the end of the collection
 		int indexPosition = 0;
 		List<arr> internalList;
-		
+		// iterate through the collection as a List
 		public CustomIterator(List<arr> internalList) {
 			this.internalList = internalList;
 		}
 
 		@Override
+                //check against indexPosition +1
+                // if reached the end of the collection
 		public boolean hasNext() {
 			if(internalList.size() >= indexPosition + 1) {
 				return true;
@@ -101,10 +93,12 @@ public class Studlist<T> implements Iterable<T>{
 		}
 
 		@Override
+               
 		public arr next() {
 			arr val = internalList.get(indexPosition);
-			indexPosition += 2;
+			indexPosition += 2;//skip every second element in the collection
 			return val;
+                        
 		}
 		
 	}
@@ -211,7 +205,7 @@ public class Studlist<T> implements Iterable<T>{
                                          System.out.println("\n[ADMIN] SEARCH USER");
                                          System.out.print("Search[USeP ID]: ");
                                          String search=input.next();
-                                         int index=userID.indexOfSting(search);
+                                         int index=userID.indexOf(search);
                                          System.out.print("");
                                            userID.display(index);
                                            username.display(index);
@@ -233,7 +227,7 @@ public class Studlist<T> implements Iterable<T>{
                                             String iD = input.next();
                                             userID.add(iD);
                                             
-                                         System.out.print("Username[Surname,FI, MI]: "); 
+                                         System.out.print("Username[Surname,FI,MI]: "); 
                                             String Name = input.next();
                                             username.add(Name);
                                             
@@ -244,11 +238,11 @@ public class Studlist<T> implements Iterable<T>{
                                          System.out.print("Campus:  0brero[1], mintal[2] or tagum[3]    "); 
                                             int campuses = input.nextInt();
                                                         if(campuses==1){
-                                                        status.add("Obrero");}
+                                                        campus.add("Obrero");}
                                                         if(campuses==2){
-                                                        status.add("Mintal");}
+                                                        campus.add("Mintal");}
                                                         if(campuses==3){
-                                                        status.add("Tagum");}                                          
+                                                        campus.add("Tagum");}                                          
                                             
                                          System.out.println("Health Status:    Positive[1], Quarantined[2] or Healthy[3]    "); 
                                             int stats = input.nextInt();                                            
@@ -278,7 +272,7 @@ public class Studlist<T> implements Iterable<T>{
                                          System.out.println("\n[ADMIN] DELETE DATA");
                                          System.out.print("Search[USeP ID]: ");
                                          String seDel=input.next();
-                                         int deleted=userID.indexOfSting(seDel);
+                                         int deleted=userID.indexOf(seDel);
                                          int del=deleted;
                                          userID.remove(del);
                                             username.remove(del);
@@ -292,7 +286,7 @@ public class Studlist<T> implements Iterable<T>{
                                          System.out.println("\n[ADMIN] UPDATE");
                                          System.out.print("Search[USeP ID]: ");
                                          String update=input.next();
-                                         int indx=userID.indexOfSting(update);
+                                         int indx=userID.indexOf(update);
                                          int element=indx;
                                          
                                          System.out.println("[Update]");
@@ -313,11 +307,11 @@ public class Studlist<T> implements Iterable<T>{
                                                         int newcamp=input.nextInt();
                                                                                                     
                                                         if(newcamp==1){
-                                                        status.set(element,"Obrero");}
+                                                        campus.set(element,"Obrero");}
                                                         if(newcamp==2){
-                                                        status.set(element,"Mintal");}
+                                                        campus.set(element,"Mintal");}
                                                         if(newcamp==3){
-                                                        status.set(element,"Tagum");}
+                                                        campus.set(element,"Tagum");}
                                                         }
                                                         if(decs=='4'){
                                                         System.out.println("Health Status Updates: Positive[1], Quarantined[2] or Healthy[3]");
